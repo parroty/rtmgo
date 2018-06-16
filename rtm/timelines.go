@@ -1,0 +1,29 @@
+package rtm
+
+type TimelineResponse struct {
+	Stat     string
+	Err      ErrorResponse
+	Timeline string
+}
+
+type TimelineRootResponse struct {
+	Rsp TimelineResponse
+}
+
+type TimelinesService struct {
+	HTTP *HTTP
+}
+
+func (s *TimelinesService) Create() (string, error) {
+	result := new(TimelineRootResponse)
+
+	query := map[string]string{}
+
+	err := s.HTTP.Request("rtm.timelines.create", query, &result)
+	err = s.HTTP.VerifyResponse(err, result.Rsp.Stat, result.Rsp.Err)
+	if err != nil {
+		return "", err
+	}
+
+	return result.Rsp.Timeline, nil
+}

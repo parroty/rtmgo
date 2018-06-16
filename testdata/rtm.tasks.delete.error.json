@@ -1,0 +1,9 @@
+{
+    "rsp": {
+        "stat": "fail",
+        "err": {
+            "code": "340",
+            "msg": "taskseries_id/task_id invalid or not provided"
+        }
+    }
+}

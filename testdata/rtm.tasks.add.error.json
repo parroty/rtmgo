@@ -1,0 +1,9 @@
+{
+    "rsp": {
+        "stat": "fail",
+        "err": {
+            "code": "4000",
+            "msg": "Task name provided is invalid."
+        }
+    }
+}

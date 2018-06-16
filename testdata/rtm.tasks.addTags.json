@@ -1,0 +1,45 @@
+{
+    "rsp": {
+        "stat": "ok",
+        "transaction": {
+            "id": "400000000",
+            "undoable": "1"
+        },
+        "list": {
+            "id": "20000000",
+            "taskseries": [
+                {
+                    "id": "300000000",
+                    "created": "2018-05-20T15:01:35Z",
+                    "modified": "2018-05-27T13:21:23Z",
+                    "name": "newTaskName",
+                    "source": "api",
+                    "url": "",
+                    "location_id": "",
+                    "tags": {
+                        "tag": [
+                            "a",
+                            "b",
+                            "c"
+                        ]
+                    },
+                    "participants": [],
+                    "notes": [],
+                    "task": [
+                        {
+                            "id": "600000000",
+                            "due": "",
+                            "has_due_time": "0",
+                            "added": "2018-05-20T15:01:35Z",
+                            "completed": "",
+                            "deleted": "",
+                            "priority": "N",
+                            "postponed": "0",
+                            "estimate": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

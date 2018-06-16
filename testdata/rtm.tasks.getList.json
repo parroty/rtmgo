@@ -1,0 +1,68 @@
+{
+    "rsp": {
+        "stat": "ok",
+        "tasks": {
+            "rev": "3asarqdjww8o4zumuk1u13mxr747i53",
+            "list": [
+                {
+                    "id": "20000000",
+                    "taskseries": [
+                        {
+                            "id": "300000000",
+                            "created": "2013-08-17T06:00:55Z",
+                            "modified": "2013-08-17T06:00:55Z",
+                            "name": "task1",
+                            "source": "api",
+                            "url": "",
+                            "location_id": "",
+                            "tags": [],
+                            "participants": [],
+                            "notes": [],
+                            "task": [
+                                {
+                                    "id": "400000000",
+                                    "due": "",
+                                    "has_due_time": "0",
+                                    "added": "2013-08-17T06:00:55Z",
+                                    "completed": "",
+                                    "deleted": "",
+                                    "priority": "N",
+                                    "postponed": "0",
+                                    "estimate": ""
+                                }
+                            ]
+                        },
+                        {
+                            "id": "300000001",
+                            "created": "2013-08-18T08:22:38Z",
+                            "modified": "2013-08-18T08:22:38Z",
+                            "name": "task2",
+                            "source": "api",
+                            "url": "",
+                            "location_id": "",
+                            "tags": [],
+                            "participants": [],
+                            "notes": [],
+                            "task": [
+                                {
+                                    "id": "400000001",
+                                    "due": "",
+                                    "has_due_time": "0",
+                                    "added": "2013-08-18T08:22:38Z",
+                                    "completed": "",
+                                    "deleted": "",
+                                    "priority": "N",
+                                    "postponed": "0",
+                                    "estimate": ""
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "20000001"
+                }
+            ]
+        }
+    }
+}
