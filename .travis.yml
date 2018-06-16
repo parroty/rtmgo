@@ -1,9 +1,11 @@
 language: go
 sudo: false
 go:
+  - 1.10
   - tip
 before_install:
   - go get github.com/mattn/goveralls
 script:
-  - go test ./...
-  - $GOPATH/bin/goveralls -service=travis-ci
+  - go test -coverprofile=profile.cov ./...
+after_script:
+  - $GOPATH/bin/goveralls -coverprofile=.profile.cov -service=travis-ci
