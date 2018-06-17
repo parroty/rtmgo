@@ -49,7 +49,7 @@ func main() {
 					panic(err)
 				}
 				w.Header().Set("Content-Type", "application/json")
-				fmt.Fprintf(w, string(data))
+				fmt.Fprint(w, string(data))
 			},
 		)
 		ts := httptest.NewServer(mux)

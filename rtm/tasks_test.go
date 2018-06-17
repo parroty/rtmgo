@@ -31,7 +31,7 @@ func prepareTestServer(modes map[string]string) *httptest.Server {
 			}
 
 			w.Header().Set("Content-Type", "application/json")
-			fmt.Fprintf(w, string(data))
+			fmt.Fprint(w, string(data))
 		},
 	)
 	return httptest.NewServer(mux)
