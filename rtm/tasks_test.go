@@ -1,49 +1,12 @@
 package rtm
 
 import (
-	"fmt"
-	"io/ioutil"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
-func prepareTestServer(modes map[string]string) *httptest.Server {
-	mux := http.NewServeMux()
-	mux.HandleFunc(
-		"/services/rest",
-		func(w http.ResponseWriter, r *http.Request) {
-			q := r.URL.Query()
-			method := q["method"]
-			//fmt.Println(r.URL)
-			//fmt.Println()
-
-			var name = method[0]
-			if val, ok := modes[name]; ok {
-				name = name + "." + val
-			}
-			path := "../testdata/" + name + ".json"
-			data, err := ioutil.ReadFile(path)
-			if err != nil {
-				panic(err)
-			}
-
-			w.Header().Set("Content-Type", "application/json")
-			fmt.Fprint(w, string(data))
-		},
-	)
-	return httptest.NewServer(mux)
-}
-
-func prepareClient(ts *httptest.Server) *Client {
-	client := NewClient("dummyToken", "dummyApiKey")
-	client.SetBaseURL(ts.URL)
-	return client
-}
-
-func TestGetList(t *testing.T) {
+func TestTasksGetList(t *testing.T) {
 	ts := prepareTestServer(map[string]string{})
 	defer ts.Close()
 	client := prepareClient(ts)
@@ -56,7 +19,7 @@ func TestGetList(t *testing.T) {
 	assert.Equal(t, "task2", tasks[1].Name)
 }
 
-func TestAdd(t *testing.T) {
+func TestTasksAdd(t *testing.T) {
 	ts := prepareTestServer(map[string]string{})
 	defer ts.Close()
 	client := prepareClient(ts)
@@ -70,7 +33,7 @@ func TestAdd(t *testing.T) {
 	assert.Equal(t, "200000000", transaction.ID)
 }
 
-func TestAddError(t *testing.T) {
+func TestTasksAddError(t *testing.T) {
 	ts := prepareTestServer(map[string]string{"rtm.tasks.add": "error"})
 	defer ts.Close()
 	client := prepareClient(ts)
@@ -83,7 +46,7 @@ func TestAddError(t *testing.T) {
 	assert.Equal(t, "Task name provided is invalid. (code=4000)", err.Error())
 }
 
-func TestDelete(t *testing.T) {
+func TestTasksDelete(t *testing.T) {
 	ts := prepareTestServer(map[string]string{})
 	defer ts.Close()
 	client := prepareClient(ts)
@@ -97,7 +60,7 @@ func TestDelete(t *testing.T) {
 	assert.Equal(t, 1, len(transactions))
 }
 
-func TestDeleteError(t *testing.T) {
+func TestTasksDeleteError(t *testing.T) {
 	ts := prepareTestServer(map[string]string{"rtm.tasks.delete": "error"})
 	defer ts.Close()
 	client := prepareClient(ts)
@@ -111,7 +74,7 @@ func TestDeleteError(t *testing.T) {
 	assert.Equal(t, "taskseries_id/task_id invalid or not provided (code=340)", err.Error())
 }
 
-func TestComplete(t *testing.T) {
+func TestTasksComplete(t *testing.T) {
 	ts := prepareTestServer(map[string]string{})
 	defer ts.Close()
 	client := prepareClient(ts)
@@ -125,7 +88,7 @@ func TestComplete(t *testing.T) {
 	assert.Equal(t, 1, len(transactions))
 }
 
-func TestUncomplete(t *testing.T) {
+func TestTasksUncomplete(t *testing.T) {
 	ts := prepareTestServer(map[string]string{})
 	defer ts.Close()
 	client := prepareClient(ts)
@@ -139,7 +102,7 @@ func TestUncomplete(t *testing.T) {
 	assert.Equal(t, 1, len(transactions))
 }
 
-func TestDueDate(t *testing.T) {
+func TestTasksDueDate(t *testing.T) {
 	ts := prepareTestServer(map[string]string{})
 	defer ts.Close()
 	client := prepareClient(ts)
@@ -153,7 +116,7 @@ func TestDueDate(t *testing.T) {
 	assert.Equal(t, 1, len(transactions))
 }
 
-func TestAddTags(t *testing.T) {
+func TestTasksAddTags(t *testing.T) {
 	ts := prepareTestServer(map[string]string{})
 	defer ts.Close()
 	client := prepareClient(ts)

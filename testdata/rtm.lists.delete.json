@@ -1,0 +1,19 @@
+{
+    "rsp": {
+        "stat": "ok",
+        "transaction": {
+            "id": "600000000",
+            "undoable": "1"
+        },
+        "list": {
+            "id": "40000000",
+            "name": "newListName",
+            "deleted": "1",
+            "locked": "0",
+            "archived": "0",
+            "position": "0",
+            "smart": "0",
+            "sort_order": "0"
+        }
+    }
+}

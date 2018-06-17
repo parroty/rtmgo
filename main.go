@@ -119,10 +119,12 @@ func main() {
 			}
 		}
 	} else if *mode == "addList" {
-		_, err := client.Lists.Add(*name, "")
+		list, _, err := client.Lists.Add(*name, timeline)
 		if err != nil {
 			fmt.Println("Add List error")
 			fmt.Println(err)
+		} else {
+			fmt.Println(list.Name)
 		}
 	} else if *mode == "createTimeline" {
 		timeline, _ := client.Timelines.Create()

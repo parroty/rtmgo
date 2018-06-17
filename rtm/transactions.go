@@ -1,12 +1,12 @@
 package rtm
 
+type TransactionsService struct {
+	HTTP *HTTP
+}
+
 type Transaction struct {
 	ID       string
 	Undoable string
-}
-
-type TransactionsService struct {
-	HTTP *HTTP
 }
 
 func (s *TransactionsService) Undo(timeline string, transaction Transaction) error {

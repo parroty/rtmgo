@@ -1,5 +1,9 @@
 package rtm
 
+type TasksService struct {
+	HTTP *HTTP
+}
+
 type Chunk struct {
 	ID         string
 	Due        string
@@ -27,43 +31,39 @@ type Task struct {
 	ListID       string  // This field is not included in the API response, and should be manually set.
 }
 
-type TaskList struct {
+type taskList struct {
 	ID    string
 	Tasks []Task `json:"taskseries"`
 }
 
-type TaskListResponse struct {
+type taskListResponse struct {
 	Rev   string
-	Lists []TaskList `json:"list"`
+	Lists []taskList `json:"list"`
 }
 
-type TaskOperationResultContent struct {
+type taskOperationResultContent struct {
 	Stat        string
 	Err         ErrorResponse
 	Transaction Transaction
-	List        TaskList
+	List        taskList
 }
 
-type TaskOperationResult struct {
-	Rsp TaskOperationResultContent
+type taskOperationResult struct {
+	Rsp taskOperationResultContent
 }
 
-type GetTasksResultContent struct {
+type getTasksResultContent struct {
 	Stat  string
 	Err   ErrorResponse
-	Tasks TaskListResponse
+	Tasks taskListResponse
 }
 
-type GetTasksResult struct {
-	Rsp GetTasksResultContent
-}
-
-type TasksService struct {
-	HTTP *HTTP
+type getTasksResult struct {
+	Rsp getTasksResultContent
 }
 
 func (s *TasksService) Add(timeline string, name string) ([]Task, *Transaction, error) {
-	result := new(TaskOperationResult)
+	result := new(taskOperationResult)
 
 	query := map[string]string{}
 	query["name"] = name
@@ -85,7 +85,7 @@ func (s *TasksService) AddTags(task Task, timeline string, tags string) ([]Trans
 		query["timeline"] = timeline
 		query["tags"] = tags
 
-		result := new(TaskOperationResult)
+		result := new(taskOperationResult)
 		err := s.HTTP.Request("rtm.tasks.addTags", query, &result)
 		err = s.HTTP.VerifyResponse(err, result.Rsp.Stat, result.Rsp.Err)
 		if err != nil {
@@ -102,7 +102,7 @@ func (s *TasksService) Complete(task Task, timeline string) ([]Transaction, erro
 	results := make([]Transaction, 0)
 
 	for _, chunk := range task.Chunks {
-		result := new(TaskOperationResult)
+		result := new(taskOperationResult)
 
 		query := map[string]string{}
 		query["list_id"] = task.ListID
@@ -125,7 +125,7 @@ func (s *TasksService) Delete(task Task, timeline string) ([]Transaction, error)
 	results := make([]Transaction, 0)
 
 	for _, chunk := range task.Chunks {
-		result := new(TaskOperationResult)
+		result := new(taskOperationResult)
 
 		query := map[string]string{}
 		query["list_id"] = task.ListID
@@ -146,7 +146,7 @@ func (s *TasksService) Delete(task Task, timeline string) ([]Transaction, error)
 
 func (s *TasksService) GetList(listID string, filter string, lastSync string) ([]Task, error) {
 	tasks := make([]Task, 0)
-	result := new(GetTasksResult)
+	result := new(getTasksResult)
 
 	query := map[string]string{}
 	if listID != "" {
@@ -178,7 +178,7 @@ func (s *TasksService) SetDueDate(task Task, timeline string, due string) ([]Tra
 	results := make([]Transaction, 0)
 
 	for _, chunk := range task.Chunks {
-		result := new(TaskOperationResult)
+		result := new(taskOperationResult)
 
 		query := map[string]string{}
 		query["list_id"] = task.ListID
@@ -201,7 +201,7 @@ func (s *TasksService) Uncomplete(task Task, timeline string) ([]Transaction, er
 	results := make([]Transaction, 0)
 
 	for _, chunk := range task.Chunks {
-		result := new(TaskOperationResult)
+		result := new(taskOperationResult)
 
 		query := map[string]string{}
 		query["list_id"] = task.ListID

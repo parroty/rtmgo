@@ -1,21 +1,21 @@
 package rtm
 
-type TimelineResponse struct {
+type TimelinesService struct {
+	HTTP *HTTP
+}
+
+type timelineResponse struct {
 	Stat     string
 	Err      ErrorResponse
 	Timeline string
 }
 
-type TimelineRootResponse struct {
-	Rsp TimelineResponse
-}
-
-type TimelinesService struct {
-	HTTP *HTTP
+type timelineRootResponse struct {
+	Rsp timelineResponse
 }
 
 func (s *TimelinesService) Create() (string, error) {
-	result := new(TimelineRootResponse)
+	result := new(timelineRootResponse)
 
 	query := map[string]string{}
 

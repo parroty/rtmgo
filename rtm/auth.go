@@ -1,13 +1,7 @@
 package rtm
 
-type GetFrobResultContent struct {
-	Stat string
-	Err  ErrorResponse
-	Frob string
-}
-
-type GetFrobResult struct {
-	Rsp GetFrobResultContent
+type AuthService struct {
+	HTTP *HTTP
 }
 
 type User struct {
@@ -22,22 +16,28 @@ type Auth struct {
 	User  User
 }
 
-type GetTokenResultContent struct {
+type getFrobResultContent struct {
+	Stat string
+	Err  ErrorResponse
+	Frob string
+}
+
+type getFrobResult struct {
+	Rsp getFrobResultContent
+}
+
+type getTokenResultContent struct {
 	Stat string
 	Err  ErrorResponse
 	Auth Auth
 }
 
 type GetTokenResult struct {
-	Rsp GetTokenResultContent
-}
-
-type AuthService struct {
-	HTTP *HTTP
+	Rsp getTokenResultContent
 }
 
 func (s *AuthService) GetFrob() (string, error) {
-	result := new(GetFrobResult)
+	result := new(getFrobResult)
 
 	query := map[string]string{}
 

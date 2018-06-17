@@ -1,0 +1,40 @@
+{
+    "rsp": {
+        "stat": "ok",
+        "lists": {
+            "list": [
+                {
+                    "id": "20000000",
+                    "name": "Inbox",
+                    "deleted": "0",
+                    "locked": "1",
+                    "archived": "0",
+                    "position": "-1",
+                    "smart": "0",
+                    "sort_order": "0"
+                },
+                {
+                    "id": "20000001",
+                    "name": "All Tasks",
+                    "deleted": "0",
+                    "locked": "0",
+                    "archived": "0",
+                    "position": "0",
+                    "smart": "1",
+                    "sort_order": "0",
+                    "filter": ""
+                },
+                {
+                    "id": "20000002",
+                    "name": "newListName",
+                    "deleted": "0",
+                    "locked": "0",
+                    "archived": "0",
+                    "position": "0",
+                    "smart": "0",
+                    "sort_order": "0"
+                }
+            ]
+        }
+    }
+}
