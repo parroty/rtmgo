@@ -6,6 +6,6 @@ go:
 before_install:
   - go get github.com/mattn/goveralls
 script:
-  - go test -coverprofile=profile.cov ./...
+  - go test -coverprofile=profile.cov ./rtm
 after_script:
   - $GOPATH/bin/goveralls -coverprofile=profile.cov -package="./rtm" -service=travis-ci

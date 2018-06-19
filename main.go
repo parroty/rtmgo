@@ -142,5 +142,14 @@ func main() {
 		result, _ := client.Auth.GetToken(frob)
 		fmt.Println(result.Token)
 		fmt.Println(result.User)
+	} else if *mode == "undo" {
+		list, transaction, err := client.Lists.Add(*name, timeline)
+		if err != nil {
+			fmt.Println("Add List error")
+			fmt.Println(err)
+		} else {
+			fmt.Println(list.Name)
+			client.Transactions.Undo(timeline, transaction)
+		}
 	}
 }
